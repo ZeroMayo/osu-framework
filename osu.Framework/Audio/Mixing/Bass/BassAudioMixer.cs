@@ -92,14 +92,6 @@ namespace osu.Framework.Audio.Mixing.Bass
             ManagedBass.Bass.FXSetParameters(handle, effect);
         });
 
-        public override void UpdateDSP(DSPProcedure effect) => EnqueueAction(() =>
-        {
-            if (!activeDSPs.TryGetValue(effect, out int handle))
-                return;
-
-            ManagedBass.Bass.ChannelSetDSP(handle, effect);
-        });
-
         protected override void AddInternal(IAudioChannel channel)
         {
             Debug.Assert(CanPerformInline);

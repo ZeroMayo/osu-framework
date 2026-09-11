@@ -99,17 +99,6 @@ namespace osu.Framework.Graphics.Audio
             }
         }
 
-        public void UpdateDSP(DSPProcedure effect)
-        {
-            if (LoadState < LoadState.Ready)
-                Schedule(() => mixer.UpdateDSP(effect));
-            else
-            {
-                Debug.Assert(mixer != null);
-                mixer.UpdateDSP(effect);
-            }
-        }
-
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
