@@ -57,5 +57,11 @@ namespace osu.Framework.Audio.Mixing
         /// </summary>
         /// <param name="effect"></param>
         void UpdateEffect(IEffectParameter effect);
+
+        /// <summary>
+        /// Updates an DSP's parameters.
+        /// </summary>
+        /// <param name="effect"></param>
+        void UpdateDSP(DSPProcedure effect);
     }
 }

@@ -55,6 +55,8 @@ namespace osu.Framework.Audio.Mixing
 
         public abstract void UpdateEffect(IEffectParameter effect);
 
+        public abstract void UpdateDSP(DSPProcedure effect);
+
         /// <summary>
         /// Removes an <see cref="IAudioChannel"/> from the mix.
         /// </summary>
