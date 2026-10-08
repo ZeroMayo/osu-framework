@@ -412,6 +412,9 @@ namespace osu.Framework.Audio
             // ensure there are no brief delays on audio operations (causing stream stalls etc.) after periods of silence.
             Bass.DeviceNonStop = true;
 
+            // DSP 콜백은 항상 float PCM (-1.0 ~ 1.0)
+            Bass.FloatingPointDSP = true;
+
             // without this, if bass falls back to directsound legacy mode the audio playback offset will be way off.
             Bass.Configure(ManagedBass.Configuration.TruePlayPosition, 0);
 
