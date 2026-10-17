@@ -370,10 +370,13 @@ namespace osu.Framework.Audio
 
                 //we have successfully initialised a new device.
                 UpdateDevice(deviceId);
+                DeviceInitialisedAction.Invoke();
 
                 return true;
             }
         }
+
+        public Action DeviceInitialisedAction;
 
         /// <summary>
         /// This method calls <see cref="Bass.Init(int, int, DeviceInitFlags, IntPtr, IntPtr)"/>.
