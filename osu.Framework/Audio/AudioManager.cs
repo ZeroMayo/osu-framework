@@ -370,7 +370,8 @@ namespace osu.Framework.Audio
 
                 //we have successfully initialised a new device.
                 UpdateDevice(deviceId);
-                DeviceInitialisedAction.Invoke();
+
+                DeviceInitialisedAction?.Invoke();
 
                 return true;
             }
