@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-FFMPEG_VERSION="9.0.1"
+FFMPEG_VERSION="8.1"
 FFMPEG_FILE="ffmpeg-$FFMPEG_VERSION.tar.gz"
 FFMPEG_FLAGS=(
     # General options
