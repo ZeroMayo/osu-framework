@@ -1,12 +1,9 @@
 name: Pack and nuget
 
 on:
-  workflow_dispatch:
-    inputs:
-      VERSION:
-        description: "the version of framework."
-        required: true
-        default: "26.0.0"
+  push:
+    tags:
+      - '*'
 
 jobs:
   pack-framework:
@@ -34,9 +31,6 @@ jobs:
         id: login
         with:
           user: ${{ secrets.NUGET_USER }}
-
-      - name: Build NativeLibs
-        run: dotnet pack -c Release osu.Framework.NativeLibs /p:Configuration=Release /p:Version=${{ inputs.VERSION }} /p:GenerateDocumentationFile=true -o ${{steps.artifactsPath.outputs.nuget_artifacts}}
 
       - name: Pack (Framework)
         run: dotnet pack -c Release osu.Framework /p:Version=${{ github.ref_name }} /p:GenerateDocumentationFile=true /p:IncludeSymbols=true /p:SymbolPackageFormat=snupkg -o ${{steps.artifactsPath.outputs.nuget_artifacts}}
