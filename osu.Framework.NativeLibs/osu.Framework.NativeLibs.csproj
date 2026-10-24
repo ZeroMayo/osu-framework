@@ -3,7 +3,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <AssemblyTitle>osu!framework Libraries</AssemblyTitle>
-    <AssemblyName>osu.Framework.NativeLibs</AssemblyName>
+    <AssemblyName>ZeroMayo.osu.Framework.NativeLibs</AssemblyName>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <PropertyGroup Label="Nuget">
