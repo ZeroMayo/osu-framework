@@ -37,12 +37,12 @@ jobs:
           user: ${{ secrets.NUGET_USER }}
 
       - name: Build NativeLibs
-        run: dotnet pack -c Release AXPlayer.NativeLibs /p:Configuration=Release /p:Version=${{ inputs.VERSION }} /p:GenerateDocumentationFile=true -o ${{steps.artifactsPath.outputs.nuget_artifacts}}
+        run: dotnet pack -c Release osu.Framework.NativeLibs /p:Configuration=Release /p:Version=${{ inputs.VERSION }} /p:GenerateDocumentationFile=true -o ${{steps.artifactsPath.outputs.nuget_artifacts}}
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: ax-player-nativelibs
+          name: osu-framework-nativelibs
           path: ${{steps.artifactsPath.outputs.nuget_artifacts}}/*.nupkg
 
       - name: Publish packages to nuget.org
