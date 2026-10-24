@@ -10,6 +10,8 @@ jobs:
     name: Pack (Framework)
     runs-on: windows-latest
     environment: production
+    permissions:
+      id-token: write  # enable GitHub OIDC token issuance for this job
     defaults:
       run:
         shell: powershell
