@@ -370,6 +370,31 @@ namespace osu.Framework.Graphics.Containers
         /// <returns>The view.</returns>
         public BufferedContainerView<T> CreateView() => new BufferedContainerView<T>(this, sharedData);
 
+        RectangleF IBackbufferProvider.BackbufferDrawRectangle
+        {
+            get
+            {
+                RectangleF rect = ScreenSpaceDrawQuad.AABBFloat;
+
+                // Matches the clipping performed by BufferedDrawNode.
+                if (sharedData.ClipToRootNode)
+                {
+                    IDrawable rootNode = this;
+                    while (rootNode.Parent != null)
+                        rootNode = rootNode.Parent;
+
+                    rect.Intersect(new RectangleF(rootNode.ScreenSpaceDrawQuad.TopLeft, rootNode.ScreenSpaceDrawQuad.Size));
+                }
+
+                return rect;
+            }
+        }
+
+        void IBackbufferProvider.RequestBackbuffer()
+        {
+            // Always drawn to a framebuffer.
+        }
+
         public DrawColourInfo? FrameBufferDrawColour => base.DrawColourInfo;
 
         // Children should not receive the true colour to avoid colour doubling when the frame-buffers are rendered to the back-buffer.

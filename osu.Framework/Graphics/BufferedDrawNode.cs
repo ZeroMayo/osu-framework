@@ -128,8 +128,14 @@ namespace osu.Framework.Graphics
             UnbindTextureShader(renderer);
         }
 
+        /// <summary>
+        /// Whether the main buffer of <see cref="SharedData"/> should be redrawn this frame.
+        /// </summary>
         protected virtual bool RequiresMainBufferRedraw => RequiresRedraw;
 
+        /// <summary>
+        /// Whether the effect buffers of <see cref="SharedData"/> should be repopulated this frame, even if the main buffer is not redrawn.
+        /// </summary>
         protected virtual bool RequiresEffectBufferRedraw => RequiresRedraw;
 
         /// <summary>
@@ -165,6 +171,10 @@ namespace osu.Framework.Graphics
             return new ValueInvokeOnDisposal<IFrameBuffer>(frameBuffer, static b => b.Unbind());
         }
 
+        /// <summary>
+        /// Retrieves the size which the given <see cref="IFrameBuffer"/> should be allocated with when bound via <see cref="BindFrameBuffer"/>.
+        /// </summary>
+        /// <param name="frameBuffer">The <see cref="IFrameBuffer"/> which is about to be bound.</param>
         protected virtual Vector2 GetFrameBufferSize(IFrameBuffer frameBuffer) => frameBufferSize;
 
         private ValueInvokeOnDisposal<(BufferedDrawNode node, IRenderer renderer)> establishFrameBufferViewport(IRenderer renderer)

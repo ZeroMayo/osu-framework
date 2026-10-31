@@ -262,6 +262,10 @@ namespace osu.Framework.Graphics.Lines
             return result;
         }
 
+        /// <summary>
+        /// Creates the <see cref="BufferedDrawNodeSharedData"/> for this path.
+        /// The main buffer must use <see cref="TexturePixelFormat.R16Float"/>, as it stores the distance from the edge of the path.
+        /// </summary>
         protected virtual BufferedDrawNodeSharedData CreateSharedData() => new BufferedDrawNodeSharedData(TexturePixelFormat.R16Float, new[] { RenderBufferFormat.D16 }, clipToRootNode: true);
 
         private BufferedDrawNodeSharedData sharedData;

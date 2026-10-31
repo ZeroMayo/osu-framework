@@ -149,9 +149,9 @@ namespace osu.Framework.Graphics.Rendering
         bool UsingBackbuffer { get; }
 
         /// <summary>
-        /// The current framebuffer, or null if the backbuffer is used.
+        /// The currently bound framebuffer, or null if the backbuffer is used.
         /// </summary>
-        public IFrameBuffer? FrameBuffer { get; }
+        IFrameBuffer? FrameBuffer { get; }
 
         /// <summary>
         /// The texture for a white pixel.
