@@ -48,6 +48,12 @@ brew install gcc make nasm
 sudo apt install make nasm gcc pkg-config libva-dev libvdpau-dev
 ```
 
+### Android Dependencies
+
+Point `ANDROID_NDK_ROOT` at an installed NDK. Building the `x86_64` target additionally requires `nasm`
+(`sudo apt install nasm`); `yasm` is no longer supported by FFmpeg's x86 assembly sources.
+If `nasm` is not on your `PATH`, set the `NASM` environment variable to its location.
+
 ## Output files
 
 For each `<platform>-<arch>` combination, two directories will be created. The directory called `<platform>-<arch>` will

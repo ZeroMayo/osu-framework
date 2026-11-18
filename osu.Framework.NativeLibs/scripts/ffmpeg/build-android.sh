@@ -31,6 +31,21 @@ cross_arch=''
 cc=''
 cflags=''
 asm_options=''
+asm_exe=''
+
+# FFmpeg's x86 assembly sources use preprocessor features that the deprecated yasm cannot handle
+# (e.g. "%endif": no matching "%if"), so nasm is required instead.
+function require_nasm() {
+    if [ -z "$asm_exe" ]; then
+        asm_exe="${NASM:-nasm}"
+    fi
+
+    if ! command -v "$asm_exe" > /dev/null 2>&1; then
+        echo "nasm is required to build x86/x86_64 FFmpeg for Android but was not found"
+        echo "Install it or point the NASM environment variable at the nasm binary"
+        exit 1
+    fi
+}
 
 case $arch in
     armeabi-v7a)
@@ -61,6 +76,7 @@ case $arch in
         cross_arch='x86_64'
         cc="x86_64-linux-android${API_LEVEL}-clang"
         asm_options='--enable-asm --enable-inline-asm'
+        require_nasm
         ;;
 esac
 
@@ -83,11 +99,14 @@ FFMPEG_FLAGS+=(
     --nm="$bin_path/llvm-nm"
     --ranlib="$bin_path/llvm-ranlib"
     --strip="$bin_path/llvm-strip"
-    --x86asmexe="$bin_path/yasm"
     --extra-cflags="-fstrict-aliasing -fPIC -DANDROID -D__ANDROID__ $cflags"
 
     $asm_options
 )
+
+if [ -n "$asm_exe" ]; then
+    FFMPEG_FLAGS+=(--x86asmexe="$asm_exe")
+fi
 
 pushd . > /dev/null
 prep_ffmpeg "android-$arch"
