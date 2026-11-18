@@ -226,6 +226,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        
+      - name: Setup NASM
+        uses: ilammy/setup-nasm@v1
 
       - name: Build
         run: osu.Framework.NativeLibs/scripts/ffmpeg/build-android.sh
