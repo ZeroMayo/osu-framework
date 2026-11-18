@@ -238,71 +238,72 @@ jobs:
           name: android-${{ matrix.arch }}
           path: android-${{ matrix.arch }}
 
-  make-pr:
-    name: Create pull request
-    runs-on: ubuntu-22.04
-    needs:
-      - combine-macos
-      - combine-iOS
-      - build-win
-      - build-win-arm64
-      - build-linux
-      - build-android
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+  # we don't need pull request to upstream repository.
+  # make-pr:
+    # name: Create pull request
+    # runs-on: ubuntu-22.04
+    # needs:
+      # - combine-macos
+      # - combine-iOS
+      # - build-win
+      # - build-win-arm64
+      # - build-linux
+      # - build-android
+    # steps:
+      # - name: Checkout
+        # uses: actions/checkout@v6
 
-      - uses: actions/download-artifact@v8
-        with:
-          name: macOS-universal
-          path: osu.Framework.NativeLibs/runtimes/osx/native
-      - uses: actions/download-artifact@v8
-        with:
-          name: iOS-xcframework
-          path: osu.Framework.iOS/runtimes/ios/native
-      - uses: actions/download-artifact@v8
-        with:
-          name: linux-x64
-          path: osu.Framework.NativeLibs/runtimes/linux-x64/native
-      - uses: actions/download-artifact@v8
-        with:
-          name: linux-arm64
-          path: osu.Framework.NativeLibs/runtimes/linux-arm64/native
-      - uses: actions/download-artifact@v8
-        with:
-          name: win-arm64
-          path: osu.Framework.NativeLibs/runtimes/win-arm64/native
-      - uses: actions/download-artifact@v8
-        with:
-          name: win-x64
-          path: osu.Framework.NativeLibs/runtimes/win-x64/native
-      - uses: actions/download-artifact@v8
-        with:
-          name: win-x86
-          path: osu.Framework.NativeLibs/runtimes/win-x86/native
-      - uses: actions/download-artifact@v8
-        with:
-          name: android-armeabi-v7a
-          path: osu.Framework.Android/armeabi-v7a
-      - uses: actions/download-artifact@v8
-        with:
-          name: android-arm64-v8a
-          path: osu.Framework.Android/arm64-v8a
-      - uses: actions/download-artifact@v8
-        with:
-          name: android-x86
-          path: osu.Framework.Android/x86
-      - uses: actions/download-artifact@v8
-        with:
-          name: android-x86_64
-          path: osu.Framework.Android/x86_64
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: macOS-universal
+          # path: osu.Framework.NativeLibs/runtimes/osx/native
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: iOS-xcframework
+          # path: osu.Framework.iOS/runtimes/ios/native
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: linux-x64
+          # path: osu.Framework.NativeLibs/runtimes/linux-x64/native
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: linux-arm64
+          # path: osu.Framework.NativeLibs/runtimes/linux-arm64/native
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: win-arm64
+          # path: osu.Framework.NativeLibs/runtimes/win-arm64/native
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: win-x64
+          # path: osu.Framework.NativeLibs/runtimes/win-x64/native
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: win-x86
+          # path: osu.Framework.NativeLibs/runtimes/win-x86/native
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: android-armeabi-v7a
+          # path: osu.Framework.Android/armeabi-v7a
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: android-arm64-v8a
+          # path: osu.Framework.Android/arm64-v8a
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: android-x86
+          # path: osu.Framework.Android/x86
+      # - uses: actions/download-artifact@v8
+        # with:
+          # name: android-x86_64
+          # path: osu.Framework.Android/x86_64
 
-      - uses: peter-evans/create-pull-request@v8
-        with:
-          commit-message: Update FFmpeg binaries
-          title: Update FFmpeg binaries
-          body: This PR has been auto-generated to update the FFmpeg binaries.
-          branch: update-ffmpeg-binaries
-          delete-branch: true
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      # - uses: peter-evans/create-pull-request@v8
+        # with:
+          # commit-message: Update FFmpeg binaries
+          # title: Update FFmpeg binaries
+          # body: This PR has been auto-generated to update the FFmpeg binaries.
+          # branch: update-ffmpeg-binaries
+          # delete-branch: true
+        # env:
+          # ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
